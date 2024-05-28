@@ -4,14 +4,27 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+sql_server: &sql_server
+  adapter: sqlserver
+  mode: dblib
+  dataserver: 'localhost'
+  host: 'localhost'
+  username: sa
+  password: sapassword
+  timeout: 1000000
+
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
-  <<: *default
-  database: storage/development.sqlite3
+  <<: *sql_server
+  database: basketcase
+
+# development:
+#   <<: *default
+#   database: storage/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
